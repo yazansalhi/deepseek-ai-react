@@ -1,17 +1,32 @@
-import React, { createContext, useContext, useState } from "react";
+import * as React from "react";
+import DeepSeek from "./DeepSeek";
+
+const { createContext, useContext, useState } = React;
 
 interface DeepSeekContextType {
-  apiKey: string;
+  client: DeepSeek | null;
   setApiKey: (key: string) => void;
+  model: string;
+  setModel: (model: string) => void;
 }
 
 const DeepSeekContext = createContext<DeepSeekContextType | undefined>(undefined);
 
-export const DeepSeekProvider: React.FC<{ apiKey?: string; children: React.ReactNode }> = ({ apiKey: initialKey = "", children }) => {
-  const [apiKey, setApiKey] = useState<string>(initialKey);
+export const DeepSeekProvider: React.FC<{ apiKey?: string; model?: string; baseURL?: string; children: React.ReactNode }> = ({
+  apiKey = "",
+  model = "deepseek-chat-v2",
+  baseURL = "https://api.deepseek.com",
+  children
+}) => {
+  const [client, setClient] = useState<DeepSeek | null>(apiKey ? new DeepSeek(apiKey, baseURL) : null);
+  const [selectedModel, setModel] = useState<string>(model);
+
+  const setApiKey = (newApiKey: string) => {
+    setClient(new DeepSeek(newApiKey, baseURL));
+  };
 
   return (
-    <DeepSeekContext.Provider value={{ apiKey, setApiKey }}>
+    <DeepSeekContext.Provider value={{ client, setApiKey, model: selectedModel, setModel }}>
       {children}
     </DeepSeekContext.Provider>
   );

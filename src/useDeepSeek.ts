@@ -1,25 +1,36 @@
 import { useState } from "react";
-import axios from "axios";
 import { useDeepSeek } from "./DeepSeekProvider";
 
 export const useDeepSeekAPI = () => {
-  const { apiKey } = useDeepSeek();
+  const { client } = useDeepSeek();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const callDeepSeek = async (endpoint: string, payload: any) => {
-    if (!apiKey) {
-      setError("API key is missing");
+  const callDeepSeek = async (method: "chatCompletion" | "edit" | "search", params: any) => {
+    if (!client) {
+      setError("API client is not initialized");
       return;
     }
 
     setLoading(true);
     try {
-      const response = await axios.post(`https://api.deepseek.com/${endpoint}`, payload, {
-        headers: { Authorization: `Bearer ${apiKey}` },
-      });
-      setData(response.data);
+      let result;
+      switch (method) {
+        case "chatCompletion":
+          result = await client.chatCompletion(params.messages, params.model);
+          break;
+        case "edit":
+          result = await client.edit(params.input, params.instruction);
+          break;
+        case "search":
+          result = await client.search(params.query);
+          break;
+        default:
+          throw new Error("Invalid method");
+      }
+  
+      setData(result);
       setError(null);
     } catch (err: any) {
       setError(err.message);
