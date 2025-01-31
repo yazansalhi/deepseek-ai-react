@@ -1,6 +1,6 @@
 {
   "name": "deepseek-ai-react",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "React wrapper for seamless DeepSeek AI API integration",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -9,7 +9,12 @@
     "build": "tsc",
     "test": "jest"
   },
-  "keywords": ["deepseek", "react", "AI", "wrapper"],
+  "keywords": [
+    "deepseek",
+    "react",
+    "AI",
+    "wrapper"
+  ],
   "author": "Yazan Salhi",
   "license": "MIT",
   "dependencies": {
