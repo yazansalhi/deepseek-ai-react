@@ -7,8 +7,8 @@ interface DeepSeekContextType {
 
 const DeepSeekContext = createContext<DeepSeekContextType | undefined>(undefined);
 
-export const DeepSeekProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [apiKey, setApiKey] = useState<string>("");
+export const DeepSeekProvider: React.FC<{ apiKey?: string; children: React.ReactNode }> = ({ apiKey: initialKey = "", children }) => {
+  const [apiKey, setApiKey] = useState<string>(initialKey);
 
   return (
     <DeepSeekContext.Provider value={{ apiKey, setApiKey }}>

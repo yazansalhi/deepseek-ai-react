@@ -9,6 +9,11 @@ export const useDeepSeekAPI = () => {
   const [error, setError] = useState<string | null>(null);
 
   const callDeepSeek = async (endpoint: string, payload: any) => {
+    if (!apiKey) {
+      setError("API key is missing");
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await axios.post(`https://api.deepseek.com/${endpoint}`, payload, {
