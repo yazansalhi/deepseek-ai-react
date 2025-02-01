@@ -42,7 +42,7 @@ const DeepSeekComponent = () => {
 };
 
 const App = () => (
-  <DeepSeekProvider apiKey="your-api-key-here" model="deepseek-chat-v2">
+  <DeepSeekProvider apiKey="your-api-key-here" model="deepseek-chat-v2" baseURL="https://api.deepseek.com">
     <DeepSeekComponent />
   </DeepSeekProvider>
 );
@@ -59,20 +59,6 @@ Generate responses using DeepSeek AI’s chat model.
 const response = await deepseek.chatCompletion([
   { role: "user", content: "What is AI?" }
 ], "deepseek-chat-v2");
-```
-
-### **`edit(input, instruction)`**
-Modify text using DeepSeek AI’s editing capabilities.
-
-```ts
-const response = await deepseek.edit("Fix grammar mistakes", "Correct the text");
-```
-
-### **`search(query)`**
-Perform a search query using DeepSeek AI.
-
-```ts
-const response = await deepseek.search("Latest AI trends");
 ```
 
 ## 🛠 Configuration
