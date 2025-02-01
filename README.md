@@ -1,21 +1,21 @@
-# deepseek-ai-react
+# deepseek-react
 
 ## 🚀 React Wrapper for DeepSeek AI API
 
-`deepseek-ai-react` is a lightweight React package that provides seamless integration with DeepSeek AI, allowing developers to interact with the DeepSeek API effortlessly.
+`deepseek-react` is a lightweight React package that provides seamless integration with DeepSeek AI, allowing developers to interact with the DeepSeek API effortlessly.
 
 ## 📦 Installation
 
 To install the package, run:
 
 ```sh
-npm install deepseek-ai-react
+npm install deepseek-react
 ```
 
 Or with Yarn:
 
 ```sh
-yarn add deepseek-ai-react
+yarn add deepseek-react
 ```
 
 ## 🔧 Setup & Usage
@@ -24,7 +24,7 @@ For React projects, wrap your app with `DeepSeekProvider` to manage the API key 
 
 ```tsx
 import React from "react";
-import { DeepSeekProvider, useDeepSeekAPI } from "deepseek-ai-react";
+import { DeepSeekProvider, useDeepSeekAPI } from "deepseek-react";
 
 const DeepSeekComponent = () => {
   const { data, loading, error, callDeepSeek } = useDeepSeekAPI();
